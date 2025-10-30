@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem e-SelfAudit - Jabatan Audit Negara</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-circle-left {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #6B8EF7 0%, #8BA5F8 100%);
+            border-radius: 50%;
+            top: -200px;
+            left: -200px;
+            opacity: 0.9;
+        }
+
+        .bg-circle-right {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            background: linear-gradient(135deg, #9B7EF7 0%, #B89EF8 100%);
+            border-radius: 50%;
+            bottom: -220px;
+            right: -220px;
+            opacity: 0.8;
+        }
+
+        .dots-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, #d0d0d0 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.3;
+        }
+
+        .page-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            width: 100%;
+            margin: 0;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 50px 45px;
+            width: 100%;
+            max-width: 460px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .coat-of-arms {
+            width: 180px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .header-text {
+            color: #2c3e50;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        .title {
+            color: #5a6c7d;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: 0.2px;
+        }
+
+        .subtitle {
+            color: #7a8a9a;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 35px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: flex;
+            align-items: center;
+            color: #5a6c7d;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .info-icon {
+            width: 16px;
+            height: 16px;
+            background: #6B8EF7;
+            color: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 6px;
+            cursor: pointer;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid #dce3ea;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #6B8EF7;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(107, 142, 247, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #b8c2cc;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #8a9aa8;
+            font-size: 18px;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 24px;
+        }
+
+        .forgot-password a {
+            color: #6B8EF7;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .forgot-password a:hover {
+            color: #5577e6;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #6B8EF7 0%, #7B9AF8 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(107, 142, 247, 0.3);
+        }
+
+        .login-button:hover {
+            background: linear-gradient(135deg, #5577e6 0%, #6B8EF7 100%);
+            box-shadow: 0 6px 20px rgba(107, 142, 247, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .help-section {
+            text-align: center;
+            margin-top: 28px;
+            padding-top: 28px;
+            border-top: 1px solid #e8ecef;
+        }
+
+        .help-text {
+            color: #7a8a9a;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .help-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 24px;
+            background: #f4f6f8;
+            color: #6B8EF7;
+            border: 1.5px solid #e0e6ec;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .help-button:hover {
+            background: #eaeff5;
+            border-color: #6B8EF7;
+        }
+
+        .help-icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+    </style>
+    <script 
+      src="https://askjay.dev.enovade.com/widget.js" 
+      data-widget-id="bd6f3e9c-130d-45e2-93d3-35e4bbfab653" 
+      data-app-url="https://askjay.dev.enovade.com" 
+      data-api-url="https://askjay-be.dev.enovade.com" 
+      defer>
+    </script>
+</head>
+<body>
+    <div class="bg-circle-left"></div>
+    <div class="bg-circle-right"></div>
+    <div class="dots-pattern"></div>
+
+    <section class="page-wrapper">
+      <div class="login-container">
+          <div class="logo-section">
+            <img src="jata-jan.webp" alt="Jata-Jan" width="220px"><br>
+              <!-- <img src="https://eself.audit.gov.my/jata-jan.webp" width="220px"> -->
+              <!-- <svg class="coat-of-arms" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg"> -->
+                  <!-- Simplified Malaysian Coat of Arms -->
+                  <circle cx="100" cy="35" r="18" fill="#FFD700"/>
+                  <path d="M 85 35 L 95 30 L 100 20 L 105 30 L 115 35 L 105 40 L 100 50 L 95 40 Z" fill="#FFD700"/>
+                  
+                  <!-- Shield -->
+                  <path d="M 60 60 Q 60 150 100 180 Q 140 150 140 60 L 100 50 Z" fill="#CC0000" stroke="#000" stroke-width="2"/>
+                  <rect x="85" y="70" width="30" height="40" fill="#FFD700"/>
+                  <rect x="85" y="80" width="30" height="5" fill="#000"/>
+                  <rect x="85" y="95" width="30" height="5" fill="#000"/>
+                  
+                  <!-- Tigers -->
+                  <g transform="translate(40, 70)">
+                      <ellipse cx="15" cy="25" rx="12" ry="18" fill="#D2691E"/>
+                      <circle cx="15" cy="20" r="8" fill="#D2691E"/>
+                      <path d="M 10 35 Q 8 45 12 50" stroke="#8B4513" stroke-width="2" fill="none"/>
+                      <path d="M 12 35 L 10 38 L 8 36" fill="#8B4513"/>
+                  </g>
+                  
+                  <g transform="translate(145, 70)">
+                      <ellipse cx="15" cy="25" rx="12" ry="18" fill="#D2691E"/>
+                      <circle cx="15" cy="20" r="8" fill="#D2691E"/>
+                      <path d="M 20 35 Q 22 45 18 50" stroke="#8B4513" stroke-width="2" fill="none"/>
+                      <path d="M 18 35 L 20 38 L 22 36" fill="#8B4513"/>
+                  </g>
+                  
+                  <!-- Banner -->
+                  <path d="M 40 185 Q 100 195 160 185" fill="#FFD700" stroke="#000" stroke-width="1.5"/>
+                  <path d="M 40 185 L 45 205 L 40 200 Z" fill="#FFD700" stroke="#000" stroke-width="1"/>
+                  <path d="M 160 185 L 155 205 L 160 200 Z" fill="#FFD700" stroke="#000" stroke-width="1"/>
+                  <text x="100" y="197" font-size="8" text-anchor="middle" fill="#000" font-weight="bold">BERSEKUTU BERTAMBAH MUTU</text>
+              </svg>
+              
+              <!-- <div class="header-text">JABATAN PERDANA MENTERI</div>
+              <div class="header-text">JABATAN AUDIT NEGARA</div> -->
+          </div>
+
+          <div class="title">Sistem e-SelfAudit</div>
+          <div class="subtitle">Jabatan Audit Negara</div>
+
+          <form id="loginForm">
+              <div class="form-group">
+                  <label class="form-label">
+                      ID Pengguna
+                      <span class="info-icon">i</span>
+                  </label>
+                  <input type="text" class="form-input" placeholder="Sila masukkan ID Pengguna">
+              </div>
+
+              <div class="form-group">
+                  <label class="form-label">Kata Laluan</label>
+                  <div class="input-wrapper">
+                      <input type="password" id="passwordInput" class="form-input" placeholder="••••••••••">
+                      <span class="password-toggle" onclick="togglePassword()">👁️</span>
+                  </div>
+              </div>
+
+              <div class="forgot-password">
+                  <a href="#">Lupa Kata laluan.?</a>
+              </div>
+
+              <button type="submit" class="login-button">Log Masuk</button>
+          </form>
+
+          <div class="help-section">
+              <div class="help-text">Menghadapi Masalah?</div>
+              <button class="help-button">
+                  <span class="help-icon">💬</span>
+                  Meja Bantuan
+              </button>
+          </div>
+      </div>
+
+    </section>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('passwordInput');
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Fungsi log masuk untuk tujuan demonstrasi sahaja');
+        });
+    </script>
+</body>
+</html>
